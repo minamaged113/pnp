@@ -51,13 +51,17 @@ echo "Creating new python project"
 echo "/src"
 mkdir src
 
+echo "/src/__init__.py"
 echo "/src/main.py"
+touch src/__init__.py
 touch src/main.py
 
 echo "/tests"
 mkdir tests
 
+echo "/tests/__init__.py"
 echo "/tests/test_main.py"
+touch tests/__init__.py
 touch tests/test_main.py
 
 echo "/README.md"
