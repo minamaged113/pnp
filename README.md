@@ -1,9 +1,23 @@
 # **P**ython **N**ew **P**roject
 
-
 ## Installation
+```bash
+git clone https://github.com/minamaged113/pnp.git
+cd pnp
+chmod +x install.sh
+./install.sh
+```
+## Dependencies
+* tree
+* curl
+* python3
+* python3-venv
 
 ## Usage
+### Create a new python project using the defaults
+```bash
+pnp ProjectName
+```
 
 ## Uninstall
 
