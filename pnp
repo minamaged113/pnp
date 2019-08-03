@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 ################################################################################
 # Create python new project using Command line in linux systems.
 #
@@ -46,35 +46,36 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 EOCOPYRIGHT
 }
 
+[[ -n $1 ]] && mkdir $1 && cd $1 || exit 0
 echo "Creating new python project"
 
 echo "/src"
-mkdir src
+mkdir src >> /dev/null
 
 echo "/src/__init__.py"
 echo "/src/main.py"
 touch {src/__init__.py,src/main.py}
 
 echo "/tests"
-mkdir tests
+mkdir tests >> /dev/null
 
 echo "/tests/__init__.py"
 echo "/tests/test_main.py"
-touch {tests/__init__.py,tests/test_main.py}
+touch {tests/__init__.py,tests/test_main.py} 
 
 echo "/README.md"
 echo "# Python New Project" >> README.md
 
 echo "/.gitignore"
-curl https://gitignore.io/api/python >> .gitignore
+echo $(curl -s https://gitignore.io/api/python >> .gitignore) > /dev/null
 
 echo "/venv"
-python3 -m venv venv
+python3 -m venv venv >> /dev/null
 
 echo "/requirements.txt"
 touch requirements.txt
 
 echo "/LICENSE.txt"
-curl https://git.savannah.gnu.org/cgit/bash.git/plain/COPYING >> LICENSE.txt
+echo $(curl -s https://git.savannah.gnu.org/cgit/bash.git/plain/COPYING >> LICENSE.txt) > /dev/null
 
 
