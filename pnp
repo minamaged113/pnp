@@ -46,36 +46,40 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 EOCOPYRIGHT
 }
 
+# if projectName given, use it. if not, exit.
 [[ -n $1 ]] && mkdir $1 && cd $1 || exit 0
-echo "Creating new python project"
-
-echo "/src"
+# create src/ directory
 mkdir src >> /dev/null
-
-echo "/src/__init__.py"
-echo "/src/main.py"
+# create __init__.py and main.py inside src/
 touch {src/__init__.py,src/main.py}
 
-echo "/tests"
+# create tests/ directory
 mkdir tests >> /dev/null
 
-echo "/tests/__init__.py"
-echo "/tests/test_main.py"
+# create __init__.py and test_main.py inside tests/
 touch {tests/__init__.py,tests/test_main.py} 
 
-echo "/README.md"
-echo "# Python New Project" >> README.md
+# create README.md and populate
+echo "# $1" >> README.md
 
-echo "/.gitignore"
+# create .gitignore and populate it with
+# basic python boilerplate
 echo $(curl -s https://gitignore.io/api/python >> .gitignore) > /dev/null
 
-echo "/venv"
+# create python virtual environment
+# and install basic packages
 python3 -m venv venv >> /dev/null
+source venv/bin/activate
+pip install wheel >> /dev/null
+pip install pylint >> /dev/null
+pip install pep8 >> /dev/null
+pip install pytest >> /dev/null
+pip install pytest-cov >> /dev/null
 
-echo "/requirements.txt"
+# create requirements.txt file
 touch requirements.txt
 
-echo "/LICENSE.txt"
+# create LICENSE.txt and put GPL v3.0 inside
 echo $(curl -s https://git.savannah.gnu.org/cgit/bash.git/plain/COPYING >> LICENSE.txt) > /dev/null
 
 

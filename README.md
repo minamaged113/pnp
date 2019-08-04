@@ -32,9 +32,9 @@ pnp ProjectName
 - [x] Create ``/LICENSE.txt`` file.
 - [x] Populate ``/LICENSE.txt`` with GPL3 by default.
 - [x] Create a Python3 virtual environment using ``venv``.
-- [ ] ``pip install pep8``
-- [ ] ``pip install pytest``
-- [ ] ``pip install pytest-cov``
+- [x] ``pip install pep8``
+- [x] ``pip install pytest``
+- [x] ``pip install pytest-cov``
 - [x] Create ``/requirements.txt`` file.
 - [ ] ``pip freeze > requirements.txt``
 - [ ] Create ``.circleci/`` directory.
