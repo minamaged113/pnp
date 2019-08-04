@@ -1,4 +1,11 @@
-# **P**ython **N**ew **P**roject
+
+<table border=0>
+  <tr>
+    <th><img src="https://gdurl.com/snpR" alt="drawing" width="64" align="middle"/></th>
+    <th><H1>Python New Project</H1></th>
+  </tr>
+</table>
+
 
 ## Installation
 ```bash
