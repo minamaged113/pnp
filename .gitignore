@@ -1,2 +1,4 @@
 testDir/
 *.swp
+failure.txt
+success.txt
