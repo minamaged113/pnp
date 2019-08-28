@@ -7,6 +7,9 @@
 #
 # References> https://gist.github.com/11404707.git
 ################################################################################
+set -e
+set -u
+set -o pipefail
 
 NOACT=0
 NAME=$(basename $0|sed 's/\(\..*\)$//')
@@ -19,7 +22,7 @@ VERSION="0.1"
 
 HOSTNAME=`hostname -s`
 function version() {
-    cat <<EOF >&2
+    cat << EOF >&2
 $NAME - $VERSION
 EOF
 }
@@ -46,8 +49,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 EOCOPYRIGHT
 }
 
+#################################################################################
+# Main body
+# Parse options
+while getopts ':u:p:c:hn:qvVw' opt; do
+	case "$opt" in
+	    c) CONF_FILE="$OPTARG" ;;
+	    h) usage "Help Requested" ; exit 0;;
+        n) 
+		CREATE_DIR="$OPTARG"
+		echo "$OPTARG" ;;
+	    q) VERBOSE=0 ;;
+	    v) VERBOSE=$(($VERBOSE+1)) ;;
+	    V) version; exit 0;;
+	    w) copyright; exit 0;;
+	    :) usage "Option -${OPTARG} requires an argument." ; exit 1 ;;
+	    \?) usage "Invalid option -${OPTARG}" ; exit 1;;
+	esac
+done
+shift $((OPTIND-1))
+
+
 # if projectName given, use it. if not, exit.
-[[ -n $1 ]] && mkdir $1 && cd $1 || exit 0
+[[ -n $CREATE_DIR ]] && mkdir $CREATE_DIR && cd $CREATE_DIR
 # create src/ directory
 mkdir src >> /dev/null
 # create __init__.py and main.py inside src/
@@ -60,7 +84,7 @@ mkdir tests >> /dev/null
 touch {tests/__init__.py,tests/test_main.py} 
 
 # create README.md and populate
-echo "# $1" >> README.md
+echo "# $CREATE_DIR" >> README.md
 
 # create .gitignore and populate it with
 # basic python boilerplate
